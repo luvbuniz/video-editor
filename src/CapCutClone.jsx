@@ -1,5 +1,5 @@
 import React, { useState, useRef } from 'react';
-import { Film, Music, Type, Smile, Sparkles, Upload, Video, ChevronDown, ChevronRight, Search, Play, Pause, Menu, Scissors, Share2, Download, Wand2 } from 'lucide-react';
+import { Film, Music, Type, Smile, Sparkles, Upload, Video, ChevronDown, ChevronRight, Search, Play, Pause, Menu, Scissors, Share2, Download, Wand2, Folder } from 'lucide-react';
 
 export default function CapCutClone() {
   const [isPlaying, setIsPlaying] = useState(false);
@@ -21,22 +21,9 @@ export default function CapCutClone() {
     { icon: Sparkles, label: 'Effects' },
   ];
 
-  const mediaItems = [
-    { id: 1, name: 'isthatcoda.mp4', duration: '00:08' },
-    { id: 2, name: 'CHARMarrived.mp4', duration: '00:07' },
-    { id: 3, name: 'CODAreset.png', duration: null },
-    { id: 4, name: 'eliasroom.mp4', duration: '00:04' },
-    { id: 5, name: 'miraname.png', duration: null },
-    { id: 6, name: 'mirawhy1.mp4', duration: '00:07' },
-  ];
+  const mediaItems = [];
 
-  const clips = [
-    { id: 1, name: 'scene5dragged.mp4' },
-    { id: 2, name: 'scene4chloroform.mp4' },
-    { id: 3, name: 'scene3struggle.mp4' },
-    { id: 4, name: 'scene2eliasturns.mp4' },
-    { id: 5, name: 'scene1Eliasathome.mp4' },
-  ];
+  const clips = [];
 
   const sidebarSections = ['Import', 'Media', 'Subprojects', 'Yours', 'AI media'];
 
@@ -74,7 +61,7 @@ export default function CapCutClone() {
     <button
       onClick={onToggle}
       className={`relative w-9 h-5 rounded-full transition-colors duration-200 ${
-        enabled ? 'bg-[#00d4aa]' : 'bg-[#3a3a3a]'
+        enabled ? 'bg-violet-500' : 'bg-[#3a3a3a]'
       }`}
     >
       <div
@@ -95,17 +82,17 @@ export default function CapCutClone() {
       {/* Header */}
       <header className="h-10 bg-[#141414] flex items-center justify-between px-3 border-b border-[#2a2a2a]">
         <div className="flex items-center gap-2">
-          <div className="w-6 h-6 bg-gradient-to-br from-cyan-400 to-blue-500 rounded flex items-center justify-center">
+          <div className="w-6 h-6 bg-gradient-to-br from-violet-500 to-purple-600 rounded flex items-center justify-center">
             <Scissors className="w-4 h-4" />
           </div>
-          <span className="font-semibold">CapCut</span>
+          <span className="font-semibold">Video Editor</span>
           <button className="flex items-center gap-1 px-2 py-1 hover:bg-[#2a2a2a] rounded text-gray-300">
             <Menu className="w-4 h-4" />
             <span>Menu</span>
             <ChevronDown className="w-3 h-3" />
           </button>
         </div>
-        <span className="text-gray-500">1206</span>
+        <span className="text-gray-500">Untitled Project</span>
         <div className="flex items-center gap-2">
           <div className="bg-purple-900/40 text-purple-400 px-2 py-1 rounded flex items-center gap-1">
             <Sparkles className="w-3 h-3" />
@@ -115,7 +102,7 @@ export default function CapCutClone() {
             <Share2 className="w-3 h-3" />
             <span>Share</span>
           </button>
-          <button className="flex items-center gap-1 px-3 py-1.5 bg-[#00d4aa] text-black rounded font-medium">
+          <button className="flex items-center gap-1 px-3 py-1.5 bg-violet-500 text-white rounded font-medium">
             <Download className="w-3 h-3" />
             <span>Export</span>
           </button>
@@ -131,7 +118,7 @@ export default function CapCutClone() {
               onClick={() => setActiveTool(tool.label)}
               className={`w-12 h-12 flex flex-col items-center justify-center gap-1 rounded transition-all duration-150 ${
                 activeTool === tool.label
-                  ? 'text-[#00d4aa] bg-[#00d4aa]/10'
+                  ? 'text-violet-400 bg-violet-500/10'
                   : 'text-gray-500 hover:bg-[#2a2a2a] hover:text-gray-300'
               }`}
             >
@@ -149,7 +136,7 @@ export default function CapCutClone() {
                 onClick={() => toggleSection(item)}
                 className={`w-full py-1.5 px-2 rounded cursor-pointer flex items-center justify-between transition-colors duration-150 ${
                   expandedSections[item]
-                    ? 'text-[#00d4aa] bg-[#00d4aa]/10'
+                    ? 'text-violet-400 bg-violet-500/10'
                     : 'text-gray-400 hover:bg-[#1e1e1e]'
                 }`}
               >
@@ -166,7 +153,7 @@ export default function CapCutClone() {
               }`}>
                 <div className="pl-4 py-1 text-[10px] text-gray-500">
                   {item === 'Import' && <div className="py-0.5">Drag files here</div>}
-                  {item === 'Media' && <div className="py-0.5">6 items</div>}
+                  {item === 'Media' && <div className="py-0.5">0 items</div>}
                   {item === 'Subprojects' && <div className="py-0.5">No subprojects</div>}
                   {item === 'Yours' && <div className="py-0.5">Your uploads</div>}
                   {item === 'AI media' && <div className="py-0.5">AI generated</div>}
@@ -179,7 +166,7 @@ export default function CapCutClone() {
         {/* Media panel - Selection */}
         <div className="w-56 bg-[#141414] border-r border-[#2a2a2a] flex flex-col">
           <div className="p-2 flex gap-2">
-            <button className="flex items-center gap-1 px-3 py-1.5 bg-[#00d4aa] text-black rounded font-medium">
+            <button className="flex items-center gap-1 px-3 py-1.5 bg-violet-500 text-white rounded font-medium">
               <Upload className="w-3 h-3" />
               <span>Import</span>
             </button>
@@ -195,41 +182,49 @@ export default function CapCutClone() {
             </div>
           </div>
           <div className="flex-1 overflow-y-auto px-2">
-            <div className="grid grid-cols-3 gap-1">
-              {mediaItems.map((item) => (
-                <div
-                  key={item.id}
-                  className="cursor-pointer"
-                  onClick={() => setSelectedMedia(selectedMedia === item.id ? null : item.id)}
-                >
-                  <div className={`relative aspect-video bg-gradient-to-br from-[#2a3a4a] to-[#1a2a3a] rounded border-2 transition-all duration-150 ${
-                    selectedMedia === item.id
-                      ? 'border-[#00d4aa] shadow-[0_0_10px_rgba(0,212,170,0.3)]'
-                      : 'border-transparent hover:border-[#00d4aa]/50'
-                  }`}>
-                    {item.duration && (
-                      <div className="absolute top-1 right-1 bg-black/70 text-[8px] px-1 rounded">{item.duration}</div>
-                    )}
-                    {selectedMedia === item.id && (
-                      <div className="absolute inset-0 bg-[#00d4aa]/10 rounded flex items-center justify-center">
-                        <div className="w-4 h-4 bg-[#00d4aa] rounded-full flex items-center justify-center">
-                          <div className="w-2 h-2 bg-black rounded-sm" />
+            {mediaItems.length === 0 ? (
+              <div className="flex flex-col items-center justify-center h-full text-center py-8">
+                <Folder className="w-10 h-10 text-gray-600 mb-3" />
+                <p className="text-gray-500 text-sm mb-1">No media yet</p>
+                <p className="text-gray-600 text-[10px]">Import files to get started</p>
+              </div>
+            ) : (
+              <div className="grid grid-cols-3 gap-1">
+                {mediaItems.map((item) => (
+                  <div
+                    key={item.id}
+                    className="cursor-pointer"
+                    onClick={() => setSelectedMedia(selectedMedia === item.id ? null : item.id)}
+                  >
+                    <div className={`relative aspect-video bg-gradient-to-br from-[#2a3a4a] to-[#1a2a3a] rounded border-2 transition-all duration-150 ${
+                      selectedMedia === item.id
+                        ? 'border-violet-500 shadow-[0_0_10px_rgba(139,92,246,0.3)]'
+                        : 'border-transparent hover:border-violet-500/50'
+                    }`}>
+                      {item.duration && (
+                        <div className="absolute top-1 right-1 bg-black/70 text-[8px] px-1 rounded">{item.duration}</div>
+                      )}
+                      {selectedMedia === item.id && (
+                        <div className="absolute inset-0 bg-violet-500/10 rounded flex items-center justify-center">
+                          <div className="w-4 h-4 bg-violet-500 rounded-full flex items-center justify-center">
+                            <div className="w-2 h-2 bg-white rounded-sm" />
+                          </div>
                         </div>
-                      </div>
-                    )}
+                      )}
+                    </div>
+                    <p className={`text-[8px] mt-1 truncate transition-colors ${
+                      selectedMedia === item.id ? 'text-violet-400' : 'text-gray-500'
+                    }`}>{item.name}</p>
                   </div>
-                  <p className={`text-[8px] mt-1 truncate transition-colors ${
-                    selectedMedia === item.id ? 'text-[#00d4aa]' : 'text-gray-500'
-                  }`}>{item.name}</p>
-                </div>
-              ))}
-            </div>
+                ))}
+              </div>
+            )}
           </div>
           <div className="p-2 border-t border-[#2a2a2a]">
             <button className="w-full flex items-center justify-center gap-2 py-2 bg-[#1e1e1e] rounded hover:bg-[#2a2a2a] transition-colors">
-              <Sparkles className="w-3 h-3 text-[#00d4aa]" />
-              <span>AI clipper</span>
-              <span className="text-[8px] bg-green-900/50 text-green-400 px-1 rounded">Free</span>
+              <Sparkles className="w-3 h-3 text-violet-400" />
+              <span>AI Tools</span>
+              <span className="text-[8px] bg-violet-900/50 text-violet-400 px-1 rounded">Beta</span>
             </button>
           </div>
         </div>
@@ -241,21 +236,17 @@ export default function CapCutClone() {
           </div>
           <div className="flex-1 flex items-center justify-center bg-[#0a0a0a] p-4">
             <div className="w-full max-w-lg aspect-video bg-[#141414] rounded-lg flex items-center justify-center">
-              {selectedMedia ? (
-                <div className="text-center">
-                  <Film className="w-12 h-12 text-[#00d4aa] mx-auto mb-2" />
-                  <p className="text-gray-400 text-[10px]">{mediaItems.find(m => m.id === selectedMedia)?.name}</p>
-                </div>
-              ) : (
-                <Film className="w-16 h-16 text-gray-700" />
-              )}
+              <div className="text-center">
+                <Film className="w-12 h-12 text-gray-600 mx-auto mb-2" />
+                <p className="text-gray-500 text-[10px]">No clip selected</p>
+              </div>
             </div>
           </div>
           <div className="h-10 flex items-center justify-center gap-4 border-t border-[#2a2a2a]">
             <div className="flex items-center gap-2 text-[10px]">
-              <span className="text-[#00d4aa]">00:00:{String(Math.floor(playheadPosition / 2.4)).padStart(2, '0')}:00</span>
+              <span className="text-violet-400">00:00:00:00</span>
               <span className="text-gray-600">/</span>
-              <span className="text-gray-500">00:00:42:14</span>
+              <span className="text-gray-500">00:00:00:00</span>
             </div>
             <button onClick={() => setIsPlaying(!isPlaying)} className="w-8 h-8 flex items-center justify-center bg-[#1e1e1e] hover:bg-[#2a2a2a] rounded-full transition-colors">
               {isPlaying ? <Pause className="w-4 h-4" /> : <Play className="w-4 h-4" />}
@@ -273,7 +264,7 @@ export default function CapCutClone() {
                 onClick={() => setActiveRightTab(tab)}
                 className={`flex-1 py-2 text-center transition-all duration-150 ${
                   activeRightTab === tab
-                    ? 'text-[#00d4aa] border-b-2 border-[#00d4aa] bg-[#00d4aa]/5'
+                    ? 'text-violet-400 border-b-2 border-violet-500 bg-violet-500/5'
                     : 'text-gray-500 hover:text-gray-300'
                 }`}
               >
@@ -287,11 +278,11 @@ export default function CapCutClone() {
             {activeRightTab === 'Project' ? (
               <>
                 <div className="flex items-center gap-2 mb-2">
-                  <Wand2 className="w-4 h-4 text-purple-400" />
+                  <Wand2 className="w-4 h-4 text-violet-400" />
                   <span className="font-medium">Smart suggestions</span>
                 </div>
-                <p className="text-[10px] text-gray-500 mb-3">Find out how your video can be improved</p>
-                <button className="flex items-center gap-2 px-3 py-2 bg-[#00d4aa]/10 text-[#00d4aa] rounded hover:bg-[#00d4aa]/20 transition-colors">
+                <p className="text-[10px] text-gray-500 mb-3">Get AI-powered tips to improve your video</p>
+                <button className="flex items-center gap-2 px-3 py-2 bg-violet-500/10 text-violet-400 rounded hover:bg-violet-500/20 transition-colors">
                   <Sparkles className="w-3 h-3" />
                   <span>Analyze</span>
                 </button>
@@ -328,24 +319,7 @@ export default function CapCutClone() {
             ) : (
               <>
                 <h3 className="font-medium mb-3">Clip Details</h3>
-                {selectedClip ? (
-                  <div className="space-y-2">
-                    <div className="bg-[#1e1e1e] p-2 rounded">
-                      <p className="text-[10px] text-gray-500">Name</p>
-                      <p className="text-gray-300">{clips.find(c => c.id === selectedClip)?.name}</p>
-                    </div>
-                    <div className="bg-[#1e1e1e] p-2 rounded">
-                      <p className="text-[10px] text-gray-500">Duration</p>
-                      <p className="text-gray-300">00:08:14</p>
-                    </div>
-                    <div className="bg-[#1e1e1e] p-2 rounded">
-                      <p className="text-[10px] text-gray-500">Resolution</p>
-                      <p className="text-gray-300">1920 x 1080</p>
-                    </div>
-                  </div>
-                ) : (
-                  <p className="text-gray-500 text-[10px]">Select a clip in the timeline to see details</p>
-                )}
+                <p className="text-gray-500 text-[10px]">Select a clip in the timeline to see details</p>
               </>
             )}
           </div>
@@ -365,11 +339,11 @@ export default function CapCutClone() {
           ))}
           {/* Playhead indicator on ruler */}
           <div
-            className="absolute top-0 bottom-0 w-0.5 bg-[#00d4aa] z-20"
+            className="absolute top-0 bottom-0 w-0.5 bg-violet-500 z-20"
             style={{ left: `${playheadPosition}%` }}
           >
             <div
-              className="absolute -top-0 left-1/2 -translate-x-1/2 w-3 h-3 bg-[#00d4aa] cursor-grab active:cursor-grabbing"
+              className="absolute -top-0 left-1/2 -translate-x-1/2 w-3 h-3 bg-violet-500 cursor-grab active:cursor-grabbing"
               style={{ clipPath: 'polygon(50% 100%, 0 0, 100% 0)' }}
               onMouseDown={(e) => {
                 e.stopPropagation();
@@ -383,47 +357,55 @@ export default function CapCutClone() {
         <div className="flex-1 p-2 overflow-x-auto relative">
           {/* Playhead line through tracks */}
           <div
-            className="absolute top-0 bottom-0 w-0.5 bg-[#00d4aa] z-10 pointer-events-none"
+            className="absolute top-0 bottom-0 w-0.5 bg-violet-500 z-10 pointer-events-none"
             style={{ left: `calc(${playheadPosition}% + 8px)` }}
           />
 
-          {/* Video track */}
-          <div className="flex gap-1 h-14 mb-2">
-            {clips.map((clip) => (
-              <div
-                key={clip.id}
-                onClick={() => setSelectedClip(selectedClip === clip.id ? null : clip.id)}
-                className={`h-full w-28 rounded border-2 bg-gradient-to-b from-[#1a3a4a] to-[#0a2a3a] flex-shrink-0 p-1 cursor-pointer transition-all duration-150 ${
-                  selectedClip === clip.id
-                    ? 'border-[#00d4aa] shadow-[0_0_10px_rgba(0,212,170,0.4)]'
-                    : 'border-[#00d4aa]/30 hover:border-[#00d4aa]/60'
-                }`}
-              >
-                <span className={`text-[8px] truncate block ${
-                  selectedClip === clip.id ? 'text-[#00d4aa]' : 'text-gray-400'
-                }`}>{clip.name}</span>
-              </div>
-            ))}
-          </div>
-
-          {/* Audio waveform track */}
-          <div className="flex gap-1 h-6">
-            {clips.map((clip) => (
-              <div
-                key={clip.id}
-                onClick={() => setSelectedClip(selectedClip === clip.id ? null : clip.id)}
-                className={`h-full w-28 rounded bg-[#0a1a2a] flex items-center justify-center gap-px flex-shrink-0 cursor-pointer border transition-all duration-150 ${
-                  selectedClip === clip.id
-                    ? 'border-[#00d4aa]/60'
-                    : 'border-transparent'
-                }`}
-              >
-                {[...Array(20)].map((__, i) => (
-                  <div key={i} className="w-0.5 bg-[#00d4aa]/50 rounded-full" style={{ height: `${Math.random() * 60 + 30}%` }} />
+          {clips.length === 0 ? (
+            <div className="flex items-center justify-center h-full">
+              <p className="text-gray-500 text-sm">Drag media here to start editing</p>
+            </div>
+          ) : (
+            <>
+              {/* Video track */}
+              <div className="flex gap-1 h-14 mb-2">
+                {clips.map((clip) => (
+                  <div
+                    key={clip.id}
+                    onClick={() => setSelectedClip(selectedClip === clip.id ? null : clip.id)}
+                    className={`h-full w-28 rounded border-2 bg-gradient-to-b from-[#2a1a4a] to-[#1a0a3a] flex-shrink-0 p-1 cursor-pointer transition-all duration-150 ${
+                      selectedClip === clip.id
+                        ? 'border-violet-500 shadow-[0_0_10px_rgba(139,92,246,0.4)]'
+                        : 'border-violet-500/30 hover:border-violet-500/60'
+                    }`}
+                  >
+                    <span className={`text-[8px] truncate block ${
+                      selectedClip === clip.id ? 'text-violet-400' : 'text-gray-400'
+                    }`}>{clip.name}</span>
+                  </div>
                 ))}
               </div>
-            ))}
-          </div>
+
+              {/* Audio waveform track */}
+              <div className="flex gap-1 h-6">
+                {clips.map((clip) => (
+                  <div
+                    key={clip.id}
+                    onClick={() => setSelectedClip(selectedClip === clip.id ? null : clip.id)}
+                    className={`h-full w-28 rounded bg-[#1a0a2a] flex items-center justify-center gap-px flex-shrink-0 cursor-pointer border transition-all duration-150 ${
+                      selectedClip === clip.id
+                        ? 'border-violet-500/60'
+                        : 'border-transparent'
+                    }`}
+                  >
+                    {[...Array(20)].map((__, i) => (
+                      <div key={i} className="w-0.5 bg-violet-500/50 rounded-full" style={{ height: `${Math.random() * 60 + 30}%` }} />
+                    ))}
+                  </div>
+                ))}
+              </div>
+            </>
+          )}
         </div>
       </div>
     </div>
